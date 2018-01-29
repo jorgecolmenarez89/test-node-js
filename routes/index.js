@@ -3,16 +3,14 @@ const router = express.Router();
 const Request = require("request");
 
 
+
+router.get('/', (req, res) => {
+	res.render('home');
+})
+
 router.get('/items', (req, res) => {
 
-	let query = req.query;
-	let params = '';
-
-	for (var q in query){
-    params += `${q}=${query[q]}&`;
-	}
-
-	Request.get(`https://api.mercadolibre.com/sites/MLA/search?${params}`, (error, response, body) => {
+	Request.get(`https://api.mercadolibre.com/sites/MLA/search?q=:query`, (error, response, body) => {
 	    if(error) {
 	        return console.dir(error);
 	        res.send({ message: error});

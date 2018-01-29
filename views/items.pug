@@ -1,0 +1,39 @@
+extends layouts.pug
+block content
+  br
+  .container
+    .row
+      .col
+        .card
+          .card-body
+            | Categorias
+      .col-9
+        .card
+          .card-body
+            #articulos
+block scripts
+  script.
+    $(function(){
+    
+      $.ajax({
+        type: 'GET',
+        contentType: 'application/json',
+        url: 'http://localhost:3000/api/items',            
+        success: function(data) {
+
+          var html = '';
+
+          $.each(data.results, function( i, item ) {
+            
+            html += '<div class="row article">';
+            html += '<div class="col-2"><img class="img-responsive" src="'+ item.thumbnail +'" ></div>';
+            html += '<div class="col-10"><h5><a href="/items/'+ item.id +'">'+ item.title +'</a></h5><label><strong>$ '+ item.price +'</strong></label> <p>Condición - ' + item.condition + ' </p>  </div>';
+            html += '</div>';
+
+          });
+
+          $('#articulos').append(html);
+        }
+      });
+    });
+            

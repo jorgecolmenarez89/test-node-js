@@ -1,0 +1,27 @@
+extends layouts.pug
+block content
+  br
+  .container
+    .card
+      .card-body
+        .row
+          .col-6(style='text-align: center;')
+            each val in item.pictures
+              img.img-responsive(src=val.url, style='width: 70%; margin: 0px auto;')
+          .col-6
+            h3 #{item.title}
+            h4 $ #{item.price}
+            p Garantia: #{item.warranty}
+            a(href='./' + item.id +'/description')  
+            p
+              a#btn-desc(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample')
+                | descripción
+            #collapseExample.collapse
+              .card.card-body#body-desc
+                p #{description.plain_text}
+        br
+        a(href='/items') ver todos los productos
+
+
+
+

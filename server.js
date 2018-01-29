@@ -1,16 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+'use strict'
 
-const app = express();
+const app = require('./app');
 const port = process.env.PORT || 3000;
-const rutas = require('./routes');
+const config = require('./config');
 
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-app.use('/api', rutas)
-
-app.listen(port, () =>{
-	console.log(`server ${port}`);
+app.listen(config.port, () =>{
+	console.log(`server ${config.port}`);
 })
